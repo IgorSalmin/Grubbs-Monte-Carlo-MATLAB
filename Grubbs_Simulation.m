@@ -18,8 +18,6 @@ sampleSizes    = [3:150];
 % Ограничение размера матрицы в ОЗУ одного воркера
 maxChunkSize = 50; 
 
-numSubSimulations   = 1e1;  % число случаев, на которые хватит памяти в 1 итерацию
-numIteration        = 1e2;  % число итераций, в каждой numSubSimulations 
 totalSimulations    = numSubSimulations * numIteration;  % Общее число симуляций
 
 % =========================================================================
@@ -30,7 +28,7 @@ mu_binom  = numSubSimulations * alphaVal;
 std_binom = sqrt(numSubSimulations * alphaVal * (1 - alphaVal));
 
 % Берем с запасом в 5.0 сигм (вероятность утери экстремума < 0.00003%)
-keepCount = ceil(mu_binom + 3.0 * std_binom); 
+keepCount = ceil(mu_binom + 5.0 * std_binom); 
 
 % страховка на выход за границы
 keepCount = max(1, min(keepCount, numSubSimulations));
@@ -48,7 +46,7 @@ folderName = 'results';
 if ~exist(folderName, 'dir')
     mkdir(folderName);
 end
-outputFileName = fullfile(folderName, 'Grubbs_Critical_Values.xlsx');
+outputFileName = fullfile(folderName, 'Grubbs_Critical_Values_Full.xlsx');
 % -------------------------------------------------------------------------
 
 fprintf('Расчет для numSubSimulations = %.0e, numIteration = %.0e\n', numSubSimulations, numIteration);
@@ -158,7 +156,7 @@ resultsTable = table(sampleSizes', critValG1, critValGn, durationTime, ...
     'VariableNames', {'SampleSize_n', 'G1_CritVal', 'Gn_CritVal', 'durationTime'});
 
 % 2. Выводим результаты в командное окно
-fprintf('\n=== КРИТИЧЕСКИХ ЗНАЧЕНИЙ СМИРНОВА-ГРАББСА (ОДНОСТОРОННИЙ) (alpha = %.4f) ===\n', alphaVal);
+fprintf('\n=== КРИТИЧЕСКИХ ЗНАЧЕНИЙ СМИРНОВА-ГРАББСА (ОДНОСТОРОННИЙ) (alpha = %.5f) ===\n', alphaVal);
 disp(resultsTable);
 
 % 3. Экспортируем в Excel-файл
