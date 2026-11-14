@@ -18,6 +18,8 @@ sampleSizes    = [3:150];
 % Ограничение размера матрицы в ОЗУ одного воркера
 maxChunkSize = 50; 
 
+numSubSimulations   = 1e6;  % число случаев, на которые хватит памяти в 1 итерацию
+numIteration        = 1e4;  % число итераций, в каждой numSubSimulations 
 totalSimulations    = numSubSimulations * numIteration;  % Общее число симуляций
 
 % =========================================================================
