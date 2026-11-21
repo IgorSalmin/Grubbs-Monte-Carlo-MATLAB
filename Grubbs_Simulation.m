@@ -162,7 +162,7 @@ resultsTable = table(sampleSizes', critValG1, critValGn, durationTime, ...
     'VariableNames', {'SampleSize_n', 'G1_CritVal', 'Gn_CritVal', 'durationTime'});
 
 % 2. Выводим результаты в командное окно
-fprintf('\n=== КРИТИЧЕСКИХ ЗНАЧЕНИЙ СМИРНОВА-ГРАББСА (ОДНОСТОРОННИЙ) (alpha = %.5f) ===\n', alphaVal);
+fprintf('\n=== КРИТИЧЕСКИЕ ЗНАЧЕНИЯ ОДНОСТОРОННЕГО КРИТЕРИЯ СМИРНОВА-ГРАББСА …  (alpha = %.4f) ===\n', alphaVal);
 disp(resultsTable);
 
 % 3. Экспортируем в Excel-файл
